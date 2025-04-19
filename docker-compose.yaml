@@ -1,0 +1,22 @@
+services:
+  #db_userservice:
+  db_userservice:
+    image: mysql:latest
+    container_name: perspective-change
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_DATABASE=perspective-change # this line is used to create the database
+    ports:
+      - "3307:3306"                                      
+    networks:
+      - grown-together
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s     # Check health every 10 seconds
+      timeout: 5s       # Wait 5 seconds for a response
+      retries: 3       
+
+networks:
+  grown-together:  
+    driver: bridge
