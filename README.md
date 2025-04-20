@@ -3,7 +3,7 @@
 ```
 git clone https://github.com/NguyenTanDung-2004/grown-together.git
 git fetch
-git checkout -b perspective-change --track origin/perspective-change
+git checkout -b perspective-change --track origin/cache-memory-server
 ```
 
 2. Run docker-compose to start mysql. (you need to setup docker before)
