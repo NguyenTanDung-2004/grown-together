@@ -16,11 +16,17 @@ public class UserService {
 
     @Cacheable("userProfile")
     public User getUserProfile(String userId) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println("Fetching from DB for user " + userId);
         return userRepository.findById(userId).orElse(null);
     }
 
-    //@CacheEvict(value = "userProfile", key = "#userId")
+    @CacheEvict(value = "userProfile", key = "#userId")
     public void upgradeToPremium(String userId) {
         userRepository.findById(userId).ifPresent(user -> {
             if (user.getIsprenium() == false){
