@@ -1,9 +1,22 @@
 package com.example.grown_together.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.grown_together.entity.User;
+import com.example.grown_together.model.User;
 
-public interface UserRepository extends JpaRepository<User, String>{
-    
+import org.springframework.stereotype.Repository;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Repository
+public class UserRepository {
+    public final Map<String, User> users = new ConcurrentHashMap<>();
+
+    public User findById(String id) {
+        return users.get(id);
+    }
+
+    public void save(User user) {
+        users.put(user.getId(), user);
+    }
 }

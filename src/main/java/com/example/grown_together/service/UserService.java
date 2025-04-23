@@ -4,38 +4,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import com.example.grown_together.entity.User;
 import com.example.grown_together.repository.UserRepository;
 
 import org.springframework.cache.annotation.Cacheable;
+import com.example.grown_together.model.User;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
-    @Cacheable("userProfile")
-    public User getUserProfile(String userId) {
-        System.out.println("Fetching from DB for user " + userId);
-        return userRepository.findById(userId).orElse(null);
+    /*
+     * @Cacheable annotation is used to cache the result of the method.
+     * The value attribute specifies the name of the cache to use.
+     * The key attribute specifies the key to use for the cache entry.  
+     */
+    @Cacheable(value = "user", key = "#id") 
+    public User getUser(String id) {
+        return userRepository.findById(id);
     }
 
-    //@CacheEvict(value = "userProfile", key = "#userId")
-    public void upgradeToPremium(String userId) {
-        userRepository.findById(userId).ifPresent(user -> {
-            if (user.getIsprenium() == false){
-                user.setIsprenium(true);
-            }
-            else{
-                user.setIsprenium(false);
-            }
-            
-            userRepository.save(user);
-        });
+    /*
+     * @CacheEvict annotation is used to evict the cache entry for the specified key.
+     * The value attribute specifies the name of the cache to use.
+     * The key attribute specifies the key to use for the cache entry.  
+     */
+    @CacheEvict(value = "user", key = "#id")
+    public String updateUser(String id){
+        return "User updated successfully";
     }
 
-    public User createUser(User user){
-        user = this.userRepository.save(user);
-        return user; 
+    public void createUser(User user) {
+        userRepository.save(user);
     }
 }
