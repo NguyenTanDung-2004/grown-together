@@ -50,4 +50,11 @@ public class UserController {
         System.out.println("Data: " + userRepository.users);
         return ResponseEntity.ok("Hello, this is a test data.");
     }
+
+    @GetMapping("/config")
+    public ResponseEntity<String> getConfig() {
+        String config = userService.getConfig();
+        System.out.println("Config: " + config);
+        return ResponseEntity.ok(config);
+    }
 }

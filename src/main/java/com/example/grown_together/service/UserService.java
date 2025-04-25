@@ -30,6 +30,16 @@ public class UserService {
      * The value attribute specifies the name of the cache to use.
      * The key attribute specifies the key to use for the cache entry.  
      */
+    @Cacheable(value = "config", key = "'static'")
+    public String getConfig() {
+        return "config without expiration";
+    }
+
+    /*
+     * @CacheEvict annotation is used to evict the cache entry for the specified key.
+     * The value attribute specifies the name of the cache to use.
+     * The key attribute specifies the key to use for the cache entry.  
+     */
     @CacheEvict(value = "user", key = "#id")
     public String updateUser(String id){
         return "User updated successfully";
