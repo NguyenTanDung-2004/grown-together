@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS Test Frontend</title>
+</head>
+<body>
+  <h2>CORS Demo</h2>
+  <button id="callApiBtn">Call /user/CORS</button>
+
+  <script>
+    document.getElementById('callApiBtn').addEventListener('click', () => {
+      fetch('http://localhost:8080/user/CORS', {
+        method: 'GET',
+        credentials: 'include' // include cookies if needed
+      })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+        return response.text(); // or .json() depending on API
+      })
+      .then(data => {
+        console.log("✅ Success:", data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>
