@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3307/perspective-change
+    url: jdbc:mysql://localhost:3307/event_sourcing
     username: root
     password: 12345
   jpa:

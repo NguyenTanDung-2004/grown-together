@@ -2,10 +2,10 @@ services:
   #db_userservice:
   db_userservice:
     image: mysql:latest
-    container_name: perspective-change
+    container_name: event-sourcing
     environment:
       - MYSQL_ROOT_PASSWORD=12345
-      - MYSQL_DATABASE=perspective-change # this line is used to create the database
+      - MYSQL_DATABASE=event_sourcing # this line is used to create the database
     ports:
       - "3307:3306"                                      
     networks:

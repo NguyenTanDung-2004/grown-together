@@ -1,8 +1,6 @@
 package com.example.grown_together.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -11,14 +9,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "events")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
-public class User {
+public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String entityname;
+    private String eventname;
+    private String status;
+    private Long createdbyuserid;
+    private String createddate;
+    private String data;
 }
