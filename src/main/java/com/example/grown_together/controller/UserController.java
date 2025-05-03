@@ -1,5 +1,8 @@
 package com.example.grown_together.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +22,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("")
-    public ResponseEntity createUser(@RequestBody User user){
-        return ResponseEntity.ok(this.userService.createUser(user));
+    public ResponseEntity<List<User>> createUser(){
+        return userService.createUser();
     }
 
-    @GetMapping("/{userid}")
-    public ResponseEntity getUser(@PathVariable(name = "userid") String userid){
-        return ResponseEntity.ok(userService.getUserProfile(userid));
-    }
-
-    @PostMapping("/{userid}")
-    public ResponseEntity updateUser(@PathVariable(name = "userid") String userid){
-        userService.upgradeToPremium(userid);
-        return ResponseEntity.ok("success");
-    }
 }
