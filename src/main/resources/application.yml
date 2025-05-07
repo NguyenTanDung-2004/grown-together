@@ -1,0 +1,6 @@
+graphql:
+  servlet:
+    mapping: /graphql         # Specifies the endpoint for GraphQL requests. Default is /graphql.
+    enabled: true             # Enables the GraphQL servlet. Set to false to disable it.
+  tools:
+    schema-location-pattern: graphql/**/*.graphqls  # Defines the location pattern for GraphQL schema files.

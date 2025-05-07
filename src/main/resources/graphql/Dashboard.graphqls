@@ -1,0 +1,57 @@
+type Query {
+    dashboard(userId: ID!): Dashboard
+    # The root-level query for fetching the dashboard data.
+    # - `userId`: A required argument (non-nullable) of type `ID!` that identifies the user.
+    # - Returns a `Dashboard` object containing aggregated data for the user.
+}
+
+type Dashboard {
+    user: User
+    # The `User` object containing details about the user (e.g., ID, name, email).
+
+    recentOrders: [Order]
+    # A list of `Order` objects representing the user's recent orders.
+    # This field may return an empty list if the user has no orders.
+
+    unreadNotifications: Int
+    # An integer representing the count of unread notifications for the user.
+    # This value is fetched from the `NotificationService`.
+
+    loyaltyPoints: Int
+    # An integer representing the user's loyalty points.
+    # This value is fetched from the `LoyaltyService`.
+}
+
+type User {
+    id: ID
+    # The unique identifier for the user.
+
+    name: String
+    # The name of the user.
+
+    email: String
+    # The email address of the user.
+}
+
+type Order {
+    id: ID
+    # The unique identifier for the order.
+
+    total: Float
+    # The total cost of the order.
+
+    products: [Product]
+    # A list of `Product` objects representing the products in the order.
+    # This field may return an empty list if the order contains no products.
+}
+
+type Product {
+    id: ID
+    # The unique identifier for the product.
+
+    name: String
+    # The name of the product.
+
+    price: Float
+    # The price of the product.
+}
