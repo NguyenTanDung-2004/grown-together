@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: payment
+  kafka:
+    bootstrap-servers: localhost:9094
+    producer:
+      group-id: payment-group
+      auto-offset-reset: earliest
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+server:
+    port: 8081
